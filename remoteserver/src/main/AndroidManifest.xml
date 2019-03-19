@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.cmcc.media.hfp.aidl">
+
+<!--如需签名成system app,将该属性添加到上面 manifest括号中-->
+<!--android:sharedUserId="android.uid.system" -->
+
+<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+<uses-permission android:name="android.hardware.usb.host" />
+<uses-permission android:name="android.hardware.usb.accessory" />
+<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+<uses-permission android:name="android.permission.WAKE_LOCK" />
+<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+<uses-permission android:name="android.permission.READ_CONTACTS" />
+<!-- WRITE_CONTACTS is used for test cases only -->
+<uses-permission android:name="android.permission.WRITE_CONTACTS" />
+<uses-permission android:name="android.permission.READ_CALL_LOG" />
+<uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE" />
+<uses-permission android:name="android.permission.WRITE_SETTINGS" />
+<uses-permission android:name="android.permission.NFC_HANDOVER_STATUS" />
+<uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS" />
+<uses-permission android:name="android.permission.WRITE_APN_SETTINGS" />
+<uses-permission android:name="android.permission.CALL_PRIVILEGED" />
+<uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+<uses-permission android:name="android.permission.CONNECTIVITY_INTERNAL" />
+<uses-permission android:name="android.permission.MODIFY_PHONE_STATE" />
+<uses-permission android:name="android.permission.INTERACT_ACROSS_USERS"/>
+<uses-permission android:name="android.permission.MANAGE_USERS"/>
+<uses-permission android:name="com.google.android.gallery3d.permission.GALLERY_PROVIDER"/>
+<uses-permission android:name="com.android.gallery3d.permission.GALLERY_PROVIDER"/>
+<uses-permission android:name="android.permission.RECEIVE_SMS" />
+<uses-permission android:name="android.permission.SEND_SMS" />
+<uses-permission android:name="android.permission.READ_SMS" />
+<uses-permission android:name="android.permission.WRITE_SMS" />
+<uses-permission android:name="android.permission.READ_CONTACTS" />
+<uses-permission android:name="android.permission.VIBRATE" />
+
+
+<!--允许应用程序改变网络状态-->
+<uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
+<!--允许应用程序改变WIFI连接状态-->
+<uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+<!--允许应用程序访问有关的网络信息-->
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+<!--允许应用程序访问WIFI网卡的网络信息-->
+<uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+<!--允许应用程序完全使用网络-->
+<uses-permission android:name="android.permission.INTERNET"/>
+
+<uses-permission android:name="android.permission.NET_TUNNELING" />
+<uses-permission android:name="android.permission.NET_ADMIN" />
+
+
+<application
+    android:allowBackup="true"
+    android:icon="@mipmap/ic_phone_server"
+    android:roundIcon="@mipmap/ic_phone_server"
+    android:label="@string/app_name"
+    android:supportsRtl="true"
+    android:theme="@style/AppTheme"
+    tools:ignore="GoogleAppIndexingWarning">
+    <!--
+    com.example.remoteserver.RemoteService
+    com.cmcc.media.hfp.aidl
+    -->
+    <activity
+        android:name="com.cmcc.media.hfp.aidl.RemoteService">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+            <!-- sheldon.aidl可以响应Uri为com.android.example:隐士的Intent来启动,app图标桌面不显示 -->
+            <data
+                android:scheme="com.android.example"
+                android:host="sheldon.aidl"
+                android:pathPrefix="/openwith"/>
+        </intent-filter>
+    </activity>
+
+    <service
+        android:name="com.cmcc.media.hfp.aidl.RemoteService"
+        android:exported="true">
+        <intent-filter>
+            <!-- client端唤醒 -->
+            <action android:name="com.cmcc.media.hfp.client.service" />
+            <!-- 监听开机广播包 -->
+            <!-- action android:name="android.intent.action.BOOT_COMPLETED" /-->
+            <category android:name="android.intent.category.DEFAULT" />
+        </intent-filter>
+    </service>
+</application>
+
+</manifest>

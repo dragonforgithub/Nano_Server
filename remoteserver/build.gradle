@@ -1,0 +1,83 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 28
+    
+    defaultConfig {
+        applicationId "com.cmcc.media.hfp.aidl"
+        minSdkVersion 19
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+
+        //testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        // 使用Cmake工具
+        externalNativeBuild {
+            cmake {
+                cppFlags ""
+                //生成多个版本的so文件
+                abiFilters 'armeabi-v7a','arm64-v8a','x86','x86_64'
+            }
+        }
+    }
+
+    // 配置CMakeLists.txt路径
+    externalNativeBuild {
+        cmake {
+            path "CMakeLists.txt" //编译后so文件的名字
+        }
+    }
+
+    packagingOptions { //For Error: More than one file was found with OS independent path
+        pickFirst 'lib/armeabi-v7a/libnano_socket.so'
+        pickFirst 'lib/armeabi-v7a/libRemoteServiceJNI.so'
+        pickFirst 'lib/arm64-v8a/libnano_socket.so'
+        pickFirst 'lib/arm64-v8a/libRemoteServiceJNI.so'
+        pickFirst 'lib/x86/libnano_socket.so'
+        pickFirst 'lib/x86/libRemoteServiceJNI.so'
+        pickFirst 'lib/x86_64/libnano_socket.so'
+        pickFirst 'lib/x86_64/libRemoteServiceJNI.so'
+    }
+
+    buildTypes {
+        release {
+            zipAlignEnabled true
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+        debug {
+            zipAlignEnabled true
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    //自定义apk名称含版本号信息
+    android.applicationVariants.all { variant ->
+        variant.outputs.all { output -> //旧版为：each
+            def fileName = "NanoRemoteserver_${defaultConfig.versionCode}-${defaultConfig.versionName}-${releaseTime()}.apk"
+            def outputFile = output.outputFile
+            if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                //这里修改apk文件名
+                outputFileName = fileName  //旧版为：output.outputFile = new File(outputFile.parent, fileName)
+            }
+        }
+    }
+}
+
+//获取编译时间
+def releaseTime() {
+    return new Date().format("yyyy-MM-dd", TimeZone.getTimeZone("UTC"))
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    implementation project(':remoteservicecontract')
+}

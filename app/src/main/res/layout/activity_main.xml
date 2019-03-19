@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/registerCallback"
+        android:layout_width="136dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:text="注册回调" />
+
+    <Button
+        android:id="@+id/unregisterCallback"
+        android:layout_width="136dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/registerCallback"
+        android:text="注销回调" />
+
+    <Button
+        android:id="@+id/setSpeakerOn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/unregisterCallback"
+        android:text="通知手柄切换通道" />
+
+    <Button
+        android:id="@+id/dialCall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/setSpeakerOn"
+        android:text="通知手柄发起呼叫" />
+
+    <Button
+        android:id="@+id/incomingCall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/dialCall"
+        android:text="通知手柄来电振铃" />
+
+    <Button
+        android:id="@+id/answerCall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/incomingCall"
+        android:text="通知手柄接听来电" />
+
+    <Button
+        android:id="@+id/hangupCall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/answerCall"
+        android:text="通知手柄挂断通话" />
+
+    <Button
+        android:id="@+id/sendBroadcast"
+        android:layout_width="136dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="334dp"
+        android:text="发送广播" />
+
+    <TextView
+        android:id="@+id/curEvent"
+        android:layout_width="367dp"
+        android:layout_height="51dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:text="显示当前状态" />
+
+    <SurfaceView
+        android:id="@+id/preView"
+        android:layout_width="229dp"
+        android:layout_height="232dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true" />
+
+    <TextView
+        android:id="@+id/camInfo"
+        android:layout_width="132dp"
+        android:layout_height="30dp"
+        android:layout_alignStart="@+id/preView"
+        android:layout_below="@+id/preView"
+        android:text="default" />
+
+    <Button
+        android:id="@+id/music"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/answerCall"
+        android:text="播放>>" />
+
+    <Spinner
+        android:id="@+id/musicSpinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/preView"
+        android:layout_below="@+id/hangupCall"
+        android:gravity="center"
+        android:text="选择歌曲:" />
+
+    <Button
+        android:id="@+id/camSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/preView"
+        android:text="开启摄像头" />
+
+    <Button
+        android:id="@+id/audioTask"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/musicSpinner"
+        android:text="开始录播>>" />
+
+    <Button
+        android:id="@+id/opensles"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/preView"
+        android:layout_below="@+id/answerCall"
+        android:text="opensles播放>>" />
+
+</RelativeLayout>
